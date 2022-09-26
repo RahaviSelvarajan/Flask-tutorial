@@ -1,0 +1,36 @@
+export FLASK_APP=market.py
+
+# Debugger
+export FLASK_DEBUG=1
+
+# Run
+flask run 
+
+# After database creation 
+python 
+>>>from market import db 
+>>>db.create_all()
+
+>>>from market import Item
+>>>item2 = Item(name='Laptop', price=600, decription='dell laptop', barcode='123456789321)
+>>>db.session.add(item2)
+>>>db.session.commit()
+
+>>>Item.query.all()
+>>>for item in Item.query.all(price=500)
+...    item.name
+
+>>>u1 = User(username='rahavi', password_hash='12345', email_address='rahavi@gmail.com')
+>>>db.session.add(u1)
+>>>db.session.commit()
+
+>>>db.session.rollback() --> to roolback the commits
+
+>>>i1 = Item(name='IPhone10', price=422, description='desc', barcode='123456789369')
+>>>item1 = Item.query.filter_by(name='IPhone10').first()
+>>>item1.owner = User.query.filter_by(username='rahavi').first()
+>>>db.session.add(item1)
+>>>db.session.commit()
+
+>>>i = Item.query.filter_by('IPhone10').first()
+>>>i.owned_user
